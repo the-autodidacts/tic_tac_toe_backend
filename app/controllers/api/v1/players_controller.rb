@@ -1,8 +1,41 @@
 class Api::V1::PlayersController < ApplicationController
+  before_action :find_player, only: [:show, :update]
   def index
     @players = Player.all
-    # test
     render json: @players, status: :ok
-    #test
   end
+
+  def show
+    render json: @player, status: :accepted
+  end
+
+  def create
+    @player = Player.create(player_params)
+    if @player.valid?
+    redirect_to @player
+    else
+    flash[:errors] = @player.errors.full_messages
+    redirect_to new_player_path
+    end
+  end
+
+  def update
+    @player.update(player_params)
+    if @player.save
+      render json: @player, status: :accepted
+    else
+      render json: { errors: @player.errors.full_messages }, status: :unprocessible_entity
+    end
+  end
+
+  private
+
+  def player_params
+    params.permit(:name)
+  end
+
+  def find_player
+    @player = Player.find(params[:id])
+  end
+
 end
