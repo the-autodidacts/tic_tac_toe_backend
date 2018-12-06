@@ -12,10 +12,9 @@ class Api::V1::GamePlayersController < ApplicationController
   def create
     @game_player = GamePlayer.create(game_player_params)
     if @game_player.valid?
-    redirect_to @game_player
+      render json: @game_player, status: :created
     else
-    flash[:errors] = @game_player.errors.full_messages
-    redirect_to new_game_player_path
+      render json: { errors: @game_player.errors.full_messages }, status: :unprocessible_entity
     end
   end
 
@@ -31,7 +30,7 @@ class Api::V1::GamePlayersController < ApplicationController
   private
 
   def game_player_params
-    params.permit(:name)
+    params.permit(:player1_id, :player2_id, :game_id)
   end
 
   def find_game_player

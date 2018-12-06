@@ -10,7 +10,8 @@ class Api::V1::GamesController < ApplicationController
   end
 
   def create
-    @game = Game.create(game_params)
+    # byebug
+    @game = Game.create(board: params[:game][:board].join("%"))
     if @game.valid?
       render json: @game, status: :created
     else
@@ -28,10 +29,6 @@ class Api::V1::GamesController < ApplicationController
   end
 
   private
-
-  def game_params
-    params.permit(:board)
-  end
 
   def find_game
     @game = Game.find(params[:id])
