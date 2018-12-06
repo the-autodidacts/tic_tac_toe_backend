@@ -12,12 +12,12 @@ class Api::V1::PlayersController < ApplicationController
   def create
     @player = Player.create(player_params)
     if @player.valid?
-    redirect_to @player
+      render json: @player, status: :created
     else
-    flash[:errors] = @player.errors.full_messages
-    redirect_to new_player_path
+      render json: { errors: @player.errors.full_messages }, status: :unprocessible_entity
     end
   end
+
 
   def update
     @player.update(player_params)
