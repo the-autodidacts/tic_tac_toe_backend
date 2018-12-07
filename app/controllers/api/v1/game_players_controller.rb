@@ -6,7 +6,7 @@ class Api::V1::GamePlayersController < ApplicationController
   end
 
   def show
-    render json: @game, status: :accepted
+    render json: @game_player, status: :accepted
   end
 
   def create
@@ -34,6 +34,6 @@ class Api::V1::GamePlayersController < ApplicationController
   end
 
   def find_game_player
-    @game_player = Game.find(params[:id])
+    @game_player = GamePlayer.find(params[:id])
   end
 end
