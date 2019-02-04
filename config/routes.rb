@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :players
+      get "/players/:id/games", to: "players#get_games"
     end
   end
   namespace :api do

@@ -1,5 +1,5 @@
 class Api::V1::PlayersController < ApplicationController
-  before_action :find_player, only: [:show, :update]
+  before_action :find_player, only: [:show, :update, :get_games]
   def index
     @players = Player.all
     render json: @players, status: :ok
@@ -27,6 +27,13 @@ class Api::V1::PlayersController < ApplicationController
       render json: { errors: @player.errors.full_messages }, status: :unprocessible_entity
     end
   end
+
+  def get_games
+    @games = @player.games
+    render json: @games, status: :ok
+  end
+
+
 
   private
 
