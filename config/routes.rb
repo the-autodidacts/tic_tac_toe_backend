@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope path: 'tictactaco' do 
+  scope path: 'tictactacoapi' do 
     namespace :api do
       namespace :v1 do
         resources :players
