@@ -30,7 +30,7 @@ class Api::V1::GamePlayersController < ApplicationController
   private
 
   def game_player_params
-    params.permit(:player1_id, :player2_id, :game_id)
+    params.permit(:player1_id, :player2_id, :game_id, :game_winner)
   end
 
   def find_game_player
